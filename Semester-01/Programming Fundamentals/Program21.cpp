@@ -2,19 +2,18 @@
 // Author: Raees
 
 #include <iostream>
-#include <vector>
 #include <string>
 
 using namespace std;
 
-int calculateFullRotations(const vector<string>& directions) {
+int calculateFullRotations(const string directions[], int size) {
     int angle = 0;
 
     // Iterate through each direction in the list
-    for (const string& direction : directions) {
-        if (direction == "left") {
+    for (int i = 0; i < size; ++i) {
+        if (directions[i] == "left") {
             angle -= 90; // Subtract 90° for each "left" direction
-        } else if (direction == "right") {
+        } else if (directions[i] == "right") {
             angle += 90; // Add 90° for each "right" direction
         }
     }
@@ -25,8 +24,9 @@ int calculateFullRotations(const vector<string>& directions) {
 }
 
 int main() {
-    vector<string> directions = {"right", "right", "right", "right", "left", "left", "left", "left"};
-    int rotations = calculateFullRotations(directions);
+    string directions[] = {"right", "right", "right", "right", "left", "left", "left", "left"};
+    int size = sizeof(directions) / sizeof(directions[0]);
+    int rotations = calculateFullRotations(directions, size);
     cout << "Full 360° rotations: " << rotations << endl;
     return 0;
 }

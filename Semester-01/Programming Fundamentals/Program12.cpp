@@ -1,26 +1,11 @@
-// Program to find the difference between the largest and smallest integers in an array
-// Author: Raees
-
 #include <iostream>
+#include <algorithm>
 
 using namespace std;
 
 int findDifference(int arr[], int size) {
-    // Initialize minElement and maxElement with the first element of the array
-    int minElement = arr[0];
-    int maxElement = arr[0];
-    
-    // Traverse the array to find the smallest and largest elements
-    for (int i = 1; i < size; ++i) {
-        if (arr[i] < minElement) {
-            minElement = arr[i];
-        }
-        if (arr[i] > maxElement) {
-            maxElement = arr[i];
-        }
-    }
-    
-    // Return the difference between the largest and smallest elements
+    int minElement = *min_element(arr, arr + size);
+    int maxElement = *max_element(arr, arr + size);
     return maxElement - minElement;
 }
 

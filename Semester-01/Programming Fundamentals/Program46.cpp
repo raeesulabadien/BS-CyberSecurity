@@ -1,15 +1,13 @@
 #include <iostream>
-#include <vector>
-#include <numeric>
 
 using namespace std;
 
 // Function to check if all cargo can fit on the ship
-bool canFitCargo(int totalCargo, const vector<char>& cargoHolds) {
+bool canFitCargo(int totalCargo, const char cargoHolds[], int size) {
     int totalSpace = 0;
 
-    for (char hold : cargoHolds) {
-        switch (hold) {
+    for (int i = 0; i < size; ++i) {
+        switch (cargoHolds[i]) {
             case 'S':
                 totalSpace += 50;
                 break;
@@ -20,7 +18,7 @@ bool canFitCargo(int totalCargo, const vector<char>& cargoHolds) {
                 totalSpace += 200;
                 break;
             default:
-                cerr << "Invalid cargo hold type: " << hold << endl;
+                cerr << "Invalid cargo hold type: " << cargoHolds[i] << endl;
                 return false;
         }
     }
@@ -32,10 +30,11 @@ int main() {
     // Total cargo to be transported
     int totalCargo = 350;
     // Types of cargo holds in the ship
-    vector<char> cargoHolds = {'S', 'M', 'L', 'M'};
+    char cargoHolds[] = {'S', 'M', 'L', 'M'};
+    int size = sizeof(cargoHolds) / sizeof(cargoHolds[0]);
 
     // Check if all cargo can fit on the ship
-    if (canFitCargo(totalCargo, cargoHolds)) {
+    if (canFitCargo(totalCargo, cargoHolds, size)) {
         cout << "All cargo can fit on the ship." << endl;
     } else {
         cout << "Not all cargo can fit on the ship." << endl;

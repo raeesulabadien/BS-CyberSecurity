@@ -2,13 +2,12 @@
 // Author: Raees
 
 #include <iostream>
-#include <vector>
 #include <string>
 
 using namespace std;
 
-bool areSamAndFrodoClose(const vector<string>& names) {
-    for (size_t i = 0; i < names.size() - 1; ++i) {
+bool areSamAndFrodoClose(const string names[], int size) {
+    for (int i = 0; i < size - 1; ++i) {
         if ((names[i] == "Sam" && names[i + 1] == "Frodo") || 
             (names[i] == "Frodo" && names[i + 1] == "Sam")) {
             return true;
@@ -18,8 +17,9 @@ bool areSamAndFrodoClose(const vector<string>& names) {
 }
 
 int main() {
-    vector<string> names = {"Gandalf", "Sam", "Frodo", "Aragorn"};
-    if (areSamAndFrodoClose(names)) {
+    string names[] = {"Gandalf", "Sam", "Frodo", "Aragorn"};
+    int size = sizeof(names) / sizeof(names[0]);
+    if (areSamAndFrodoClose(names, size)) {
         cout << "Sam and Frodo are close." << endl;
     } else {
         cout << "Sam and Frodo are not close." << endl;
