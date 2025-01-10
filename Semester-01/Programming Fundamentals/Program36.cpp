@@ -3,6 +3,9 @@
 
 using namespace std;
 
+// Raees
+// This program rearranges a string so that all vowels come first, followed by consonants and other characters.
+
 // Function to check if a character is a vowel
 bool isVowel(char c) {
     c = tolower(c); // Convert character to lowercase for uniformity
@@ -13,21 +16,24 @@ bool isVowel(char c) {
 string rearrangeString(const string& str) {
     string vowels, consonants;
     
+    // Iterate through each character in the string
     for (char c : str) {
         if (isVowel(c)) {
-            vowels += c;
+            vowels += c; // Append to vowels string if character is a vowel
         } else {
-            consonants += c;
+            consonants += c; // Append to consonants string if character is not a vowel
         }
     }
     
+    // Concatenate vowels and consonants strings
     return vowels + consonants;
 }
 
 int main() {
-    string input = "Hello, World!";
-    string result = rearrangeString(input);
+    string input = "Hello, World!"; // Input string
+    string result = rearrangeString(input); // Get the rearranged string
     
+    // Output the original and rearranged strings
     cout << "Original string: " << input << endl;
     cout << "Rearranged string: " << result << endl;
     

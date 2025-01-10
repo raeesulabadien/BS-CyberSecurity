@@ -13,6 +13,7 @@ using namespace std;
  *
  * @param nums A constant reference to a vector of integers.
  * @return An integer representing the length of the longest consecutive run in the input vector.
+ * @author Raees
  */
 int longestConsecutiveRun(const vector<int>& nums) {
     // If the vector is empty, return 0
