@@ -1,31 +1,31 @@
 #include <iostream>
-#include <vector>
 #include <numeric>
 
 using namespace std;
 
-// Function to calculate the cumulative sum of a vector of integers
-vector<int> cumulativeSum(const vector<int>& numbers) {
-    vector<int> result(numbers.size());
-    // Using partial_sum to calculate the cumulative sum
-    partial_sum(numbers.begin(), numbers.end(), result.begin());
-    return result;
+// Function to calculate the cumulative sum of an array of integers
+void cumulativeSum(const int* numbers, int* result, int size) {
+    result[0] = numbers[0];
+    for (int i = 1; i < size; ++i) {
+        result[i] = result[i - 1] + numbers[i];
+    }
 }
 
 int main() {
-    // Initialize a vector with some numbers
-    vector<int> numbers = {1, 2, 3, 4, 5};
+    // Initialize an array with some numbers
+    int numbers[] = {1, 2, 3, 4, 5};
+    int size = sizeof(numbers) / sizeof(numbers[0]);
+    int result[size];
+
     // Calculate the cumulative sum
-    vector<int> result = cumulativeSum(numbers);
+    cumulativeSum(numbers, result, size);
 
     // Output the cumulative sum
     cout << "Cumulative sum: ";
-    for (int num : result) {
-        cout << num << " ";
+    for (int i = 0; i < size; ++i) {
+        cout << result[i] << " ";
     }
     cout << endl;
 
     return 0;
 }
-
-// Code written by Raees

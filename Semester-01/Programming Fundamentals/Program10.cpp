@@ -1,18 +1,10 @@
-// Program to check if an array is special
-// Author: Raees
-
 #include <iostream>
 using namespace std;
 
 // Function to check if the array is special
 bool isSpecialArray(int arr[], int size) {
     for (int i = 0; i < size; i++) {
-        // Check if the element at even index is even
-        if (i % 2 == 0 && arr[i] % 2 != 0) {
-            return false;
-        }
-        // Check if the element at odd index is odd
-        if (i % 2 != 0 && arr[i] % 2 == 0) {
+        if (arr[i] % 2 != i % 2) {
             return false;
         }
     }

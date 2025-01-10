@@ -3,17 +3,12 @@
 
 #include <iostream>
 #include <string>
+#include <algorithm>
 using namespace std;
 
 // Function to count the number of syllables in a word
 int countSyllables(const string& word) {
-    int count = 1; // Start with 1 because the first syllable doesn't have a dash before it
-    for (char ch : word) {
-        if (ch == '-') {
-            count++;
-        }
-    }
-    return count;
+    return count(word.begin(), word.end(), '-') + 1;
 }
 
 int main() {

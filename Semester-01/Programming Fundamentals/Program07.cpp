@@ -4,15 +4,21 @@
 
 #include <iostream>
 #include <string>
-#include <bitset>
+
+using namespace std;
 
 // Function to convert an integer to a binary string
-std::string toBinaryString(int num) {
-    return std::bitset<32>(num).to_string();
+string toBinaryString(int num) {
+    string binary = "";
+    while (num > 0) {
+        binary = (num % 2 == 0 ? "0" : "1") + binary;
+        num /= 2;
+    }
+    return binary.empty() ? "0" : binary;
 }
 
 // Function to add two numbers and return their sum as a binary string
-std::string addNumbersAsBinary(int num1, int num2) {
+string addNumbersAsBinary(int num1, int num2) {
     int sum = num1 + num2;
     return toBinaryString(sum);
 }
@@ -20,7 +26,7 @@ std::string addNumbersAsBinary(int num1, int num2) {
 int main() {
     int number1 = 5;
     int number2 = 3;
-    std::string binarySum = addNumbersAsBinary(number1, number2);
-    std::cout << "The sum of " << number1 << " and " << number2 << " in binary is: " << binarySum << std::endl;
+    string binarySum = addNumbersAsBinary(number1, number2);
+    cout << "The sum of " << number1 << " and " << number2 << " in binary is: " << binarySum << endl;
     return 0;
 }
