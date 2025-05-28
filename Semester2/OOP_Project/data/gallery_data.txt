@@ -1,0 +1,17 @@
+My Art Gallery
+3
+1
+Starry Night
+Van Gogh
+Impressionism
+1e+08
+2
+Mona Lisa
+Da Vinci
+Renaissance
+8.5e+08
+3
+The Scream
+Munch
+Expressionism
+1.2e+08
