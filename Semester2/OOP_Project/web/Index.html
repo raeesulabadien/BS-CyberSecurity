@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Art Gallery</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1>Digital Art Gallery</h1>
+            <p>Curated Collection of Fine Art</p>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="nav">
+            <button class="nav-btn active" onclick="showSection('all')">All Artworks</button>
+            <button class="nav-btn" onclick="showSection('search')">Search</button>
+            <button class="nav-btn" onclick="showSection('add')">Add Artwork</button>
+            <button class="nav-btn" onclick="showSection('file')">File Operations</button>
+        </nav>
+
+        <!-- All Artworks Section -->
+        <section id="all-section" class="section active">
+            <div class="section-header">
+                <h2>Gallery Collection</h2>
+                <div class="stats">
+                    <span id="artwork-count">3 Artworks</span>
+                </div>
+            </div>
+            <div id="artworks-grid" class="grid"></div>
+        </section>
+
+        <!-- Search Section -->
+        <section id="search-section" class="section">
+            <div class="section-header">
+                <h2>Search Artworks</h2>
+            </div>
+            
+            <div class="search-controls">
+                <div class="search-group">
+                    <label>Search by Artist</label>
+                    <div class="input-group">
+                        <input type="text" id="artist-input" placeholder="Enter artist name...">
+                        <button onclick="searchByArtist()">Search</button>
+                    </div>
+                </div>
+                
+                <div class="search-group">
+                    <label>Search by Category</label>
+                    <div class="input-group">
+                        <input type="text" id="category-input" placeholder="Enter category...">
+                        <button onclick="searchByCategory()">Search</button>
+                    </div>
+                </div>
+                
+                <div class="search-group">
+                    <label>Find by ID</label>
+                    <div class="input-group">
+                        <input type="number" id="id-input" placeholder="Enter ID...">
+                        <button onclick="findById()">Find</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="search-results" class="grid"></div>
+        </section>
+
+        <!-- Add Artwork Section -->
+        <section id="add-section" class="section">
+            <div class="section-header">
+                <h2>Add New Artwork</h2>
+            </div>
+            
+            <div class="form-container">
+                <form id="add-form" onsubmit="addArtwork(event)">
+                    <div class="form-group">
+                        <label for="new-id">ID</label>
+                        <input type="number" id="new-id" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="new-title">Title</label>
+                        <input type="text" id="new-title" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="new-artist">Artist</label>
+                        <input type="text" id="new-artist" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="new-category">Category</label>
+                        <input type="text" id="new-category" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="new-price">Price ($)</label>
+                        <input type="number" id="new-price" step="0.01" required>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">Add Artwork</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- File Operations Section -->
+        <section id="file-section" class="section">
+            <div class="section-header">
+                <h2>File Operations</h2>
+            </div>
+            
+            <div class="file-operations">
+                <div class="operation-card">
+                    <h3>Save Gallery</h3>
+                    <p>Save current gallery data to file</p>
+                    <button onclick="saveToFile()" class="action-btn">Save to File</button>
+                </div>
+                
+                <div class="operation-card">
+                    <h3>Gallery Statistics</h3>
+                    <p>View gallery information and stats</p>
+                    <button onclick="showStats()" class="action-btn">Show Statistics</button>
+                </div>
+                
+                <div class="operation-card">
+                    <h3>Export Data</h3>
+                    <p>Export gallery data for backup</p>
+                    <button onclick="exportData()" class="action-btn">Export Data</button>
+                </div>
+            </div>
+            
+            <div id="stats-display" class="stats-container"></div>
+        </section>
+
+        <!-- Modal for artwork details -->
+        <div id="artwork-modal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <div id="artwork-detail"></div>
+            </div>
+        </div>
+
+        <!-- Toast notifications -->
+        <div id="toast" class="toast"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
