@@ -1,0 +1,9 @@
+{
+  "galleryName": "Digital Art Museum",
+  "artworks": [
+    {"id":1,"title":"Starry Night","artist":"Vincent van Gogh","category":"Post-Impressionism","description":"A famous painting depicting a swirling night sky","imageUrl":"https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg/1280px-Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg","price":100000000.00},
+    {"id":2,"title":"Mona Lisa","artist":"Leonardo da Vinci","category":"Renaissance","description":"Portrait of Lisa Gherardini, wife of Florentine merchant","imageUrl":"https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg/687px-Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg","price":850000000.00},
+    {"id":3,"title":"The Scream","artist":"Edvard Munch","category":"Expressionism","description":"An artwork showing a figure with an agonized expression","imageUrl":"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Edvard_Munch%2C_1893%2C_The_Scream%2C_oil%2C_tempera_and_pastel_on_cardboard%2C_91_x_73_cm%2C_National_Gallery_of_Norway.jpg/471px-Edvard_Munch%2C_1893%2C_The_Scream%2C_oil%2C_tempera_and_pastel_on_cardboard%2C_91_x_73_cm%2C_National_Gallery_of_Norway.jpg","price":120000000.00},
+    {"id":4,"title":"Girl with a Pearl Earring","artist":"Johannes Vermeer","category":"Baroque","description":"Portrait of an unknown woman with a mysterious pearl earring","imageUrl":"https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/1665_Girl_with_a_Pearl_Earring.jpg/540px-1665_Girl_with_a_Pearl_Earring.jpg","price":50000000.00}
+  ]
+}
