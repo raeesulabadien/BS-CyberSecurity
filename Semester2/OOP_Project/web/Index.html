@@ -8,28 +8,116 @@
 </head>
 <body>
     <div class="container">
-        <!-- Header -->
+        <!-- User display in top corner -->
+        <div class="user-display">
+            <div class="user-avatar">U</div>
+            <span id="user-info">Guest</span>
+        </div>
+        
+        <!-- Header section -->
         <header class="header">
             <h1>Digital Art Gallery</h1>
             <p>Curated Collection of Fine Art</p>
         </header>
 
-        <!-- Navigation -->
+        <!-- Navigation buttons -->
         <nav class="nav">
-            <button class="nav-btn active" onclick="showSection('all')">All Artworks</button>
+            <button class="nav-btn" onclick="showSection('all')">All Artworks</button>
             <button class="nav-btn" onclick="showSection('search')">Search</button>
-            <button class="nav-btn" onclick="showSection('add')">Add Artwork</button>
-            <button class="nav-btn" onclick="showSection('file')">File Operations</button>
+            <button class="nav-btn admin-only" onclick="showSection('add')">Add Artwork</button>
+            <button class="nav-btn" onclick="showSection('stats')">Statistics</button>
+            <button class="nav-btn" onclick="showSection('dashboard')">Dashboard</button>
+            <button class="nav-btn" onclick="logout()">Logout</button>
         </nav>
 
+        <!-- Login Section -->
+        <section id="login-section" class="section">
+            <div class="login-container">
+                <div class="login-header">
+                    <h2>Welcome to Digital Art Gallery</h2>
+                    <p>Please login to continue</p>
+                </div>
+                
+                <div class="login-form">
+                    <div class="form-group">
+                        <label for="login-username">Username</label>
+                        <input type="text" id="login-username" placeholder="Enter your username">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="login-password">Password</label>
+                        <input type="password" id="login-password" placeholder="Enter your password">
+                    </div>
+                    
+                    <button onclick="login()" class="submit-btn">Login</button>
+                    <p class="login-hint">Demo credentials: admin/admin123 (Admin) or user/user123 (User)</p>
+                </div>
+            </div>
+        </section>
+
         <!-- All Artworks Section -->
-        <section id="all-section" class="section active">
+        <section id="all-section" class="section">
             <div class="section-header">
                 <h2>Gallery Collection</h2>
                 <div class="stats">
-                    <span id="artwork-count">3 Artworks</span>
+                    <span id="artwork-count">0 Artworks</span>
                 </div>
             </div>
+            
+            <!-- Filters -->
+            <div class="filter-panel">
+                <div class="filter-header">
+                    <h3>Filters <span id="filter-count"></span></h3>
+                    <button id="clear-filters-btn" style="display: none;">Clear All</button>
+                </div>
+                
+                <div id="filter-badges" class="filter-badges"></div>
+                
+                <div class="filter-options">
+                    <div class="filter-group">
+                        <label for="filter-category">Category</label>
+                        <select id="filter-category" class="filter-input">
+                            <option value="">All Categories</option>
+                            <!-- Will be filled by JavaScript -->
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="filter-artist">Artist</label>
+                        <input type="text" id="filter-artist" class="filter-input" placeholder="Search by artist">
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label>Price Range</label>
+                        <div class="price-range">
+                            <input type="number" id="filter-min-price" class="filter-input" placeholder="Min">
+                            <span>to</span>
+                            <input type="number" id="filter-max-price" class="filter-input" placeholder="Max">
+                        </div>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="filter-min-rating">Minimum Rating</label>
+                        <select id="filter-min-rating" class="filter-input">
+                            <option value="">Any Rating</option>
+                            <option value="5">5 Stars</option>
+                            <option value="4">4+ Stars</option>
+                            <option value="3">3+ Stars</option>
+                            <option value="2">2+ Stars</option>
+                            <option value="1">1+ Stars</option>
+                        </select>
+                    </div>
+                    
+                    <button id="apply-filters-btn" class="apply-filters-btn">Apply Filters</button>
+                </div>
+            </div>
+            
+            <!-- Recommendations section -->
+            <div id="recommendations-container" class="recommendations-container">
+                <!-- Will be filled by JavaScript -->
+            </div>
+            
+            <!-- Artwork grid -->
             <div id="artworks-grid" class="grid"></div>
         </section>
 
@@ -65,11 +153,11 @@
                 </div>
             </div>
             
-            <div id="search-results" class="grid"></div>
+            <div id="search-results" class="search-results"></div>
         </section>
 
         <!-- Add Artwork Section -->
-        <section id="add-section" class="section">
+        <section id="add-section" class="section admin-only">
             <div class="section-header">
                 <h2>Add New Artwork</h2>
             </div>
@@ -97,54 +185,129 @@
                     </div>
                     
                     <div class="form-group">
-                        <label for="new-price">Price ($)</label>
-                        <input type="number" id="new-price" step="0.01" required>
+                        <label for="new-price">Price</label>
+                        <input type="number" id="new-price" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="new-description">Description</label>
+                        <textarea id="new-description" rows="4"></textarea>
                     </div>
                     
                     <button type="submit" class="submit-btn">Add Artwork</button>
                 </form>
             </div>
         </section>
-
-        <!-- File Operations Section -->
-        <section id="file-section" class="section">
+        
+        <!-- Statistics Section -->
+        <section id="stats-section" class="section">
             <div class="section-header">
-                <h2>File Operations</h2>
+                <h2>Gallery Statistics</h2>
             </div>
             
-            <div class="file-operations">
-                <div class="operation-card">
-                    <h3>Save Gallery</h3>
-                    <p>Save current gallery data to file</p>
-                    <button onclick="saveToFile()" class="action-btn">Save to File</button>
-                </div>
-                
-                <div class="operation-card">
-                    <h3>Gallery Statistics</h3>
-                    <p>View gallery information and stats</p>
-                    <button onclick="showStats()" class="action-btn">Show Statistics</button>
-                </div>
-                
-                <div class="operation-card">
-                    <h3>Export Data</h3>
-                    <p>Export gallery data for backup</p>
-                    <button onclick="exportData()" class="action-btn">Export Data</button>
-                </div>
-            </div>
-            
-            <div id="stats-display" class="stats-container"></div>
+            <div id="statistics-content" class="statistics-grid"></div>
         </section>
-
-        <!-- Modal for artwork details -->
-        <div id="artwork-modal" class="modal">
-            <div class="modal-content">
-                <span class="close" onclick="closeModal()">&times;</span>
-                <div id="artwork-detail"></div>
+        
+        <!-- Dashboard Section -->
+        <section id="dashboard-section" class="section">
+            <div class="section-header">
+                <h2>Your Art Dashboard</h2>
             </div>
+            
+            <div class="dashboard-grid">
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h3>Your Activity</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="stat-item">
+                            <div class="stat-label">Artworks Rated</div>
+                            <div class="stat-value" id="user-rated-count">0</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Recently Viewed</div>
+                            <div class="stat-value" id="user-viewed-count">0</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Favorite Category</div>
+                            <div class="stat-value" id="user-favorite-category">-</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h3>Favorite Artworks</h3>
+                    </div>
+                    <div class="card-content">
+                        <div id="user-favorites" class="favorites-grid">
+                            <!-- Will be filled by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="dashboard-card wide-card">
+                    <div class="card-header">
+                        <h3>Rating Distribution</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="rating-chart">
+                            <div class="rating-bar-container">
+                                <div class="rating-label">5★</div>
+                                <div class="rating-bar-wrapper">
+                                    <div class="rating-bar" id="rating-5-bar" style="width:0%"></div>
+                                </div>
+                                <div class="rating-count" id="rating-5-count">0</div>
+                            </div>
+                            <div class="rating-bar-container">
+                                <div class="rating-label">4★</div>
+                                <div class="rating-bar-wrapper">
+                                    <div class="rating-bar" id="rating-4-bar" style="width:0%"></div>
+                                </div>
+                                <div class="rating-count" id="rating-4-count">0</div>
+                            </div>
+                            <div class="rating-bar-container">
+                                <div class="rating-label">3★</div>
+                                <div class="rating-bar-wrapper">
+                                    <div class="rating-bar" id="rating-3-bar" style="width:0%"></div>
+                                </div>
+                                <div class="rating-count" id="rating-3-count">0</div>
+                            </div>
+                            <div class="rating-bar-container">
+                                <div class="rating-label">2★</div>
+                                <div class="rating-bar-wrapper">
+                                    <div class="rating-bar" id="rating-2-bar" style="width:0%"></div>
+                                </div>
+                                <div class="rating-count" id="rating-2-count">0</div>
+                            </div>
+                            <div class="rating-bar-container">
+                                <div class="rating-label">1★</div>
+                                <div class="rating-bar-wrapper">
+                                    <div class="rating-bar" id="rating-1-bar" style="width:0%"></div>
+                                </div>
+                                <div class="rating-count" id="rating-1-count">0</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="dashboard-card wide-card">
+                    <div class="card-header">
+                        <h3>Category Distribution</h3>
+                    </div>
+                    <div class="card-content">
+                        <div id="category-chart" class="category-chart">
+                            <!-- Will be filled by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Artwork Detail Modal -->
+        <div id="artwork-modal" class="modal">
+            <div id="artwork-modal-content" class="modal-content"></div>
         </div>
-
-        <!-- Toast notifications -->
-        <div id="toast" class="toast"></div>
     </div>
 
     <script src="script.js"></script>
